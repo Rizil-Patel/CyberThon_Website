@@ -1,0 +1,80 @@
+
+* {
+  box-sizing: border-box;
+}
+.pop_box,
+.wrapper {
+  /* Your existing styles for the popup box */
+  height: 30vh;
+  width: 30vh;
+  background-color: white;
+  display: none; /* Initially hide the popup */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 80vw;
+  z-index: 1;
+}
+.popimg {
+  /* Your existing styles for the image container */
+  border-radius: 60px;
+  height: 15vh;
+  width: 15vh;
+  background-color: #1f2641;
+}
+.button {
+  /* Your existing styles for the button container */
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  width: 100%;
+  justify-content: space-around;
+}
+.btn1,
+.btn2 {
+  /* Your existing styles for the buttons */
+  background-color: orange;
+}
+.name {
+  color: white;
+}
+.visible {
+  display: flex;
+}
+
+
+.sidenav {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}

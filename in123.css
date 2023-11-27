@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    
+    background: #1f2641;
+  }
+
+  .button {
+    display: inline-block;
+    /* padding: 10px 20px; */
+    margin: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #ffffff;
+    border: 2px solid #000000; /* Black border */
+    background-color:#1f2641; /* Bluish background color for buttons */
+    cursor: pointer; 
+    border-radius: 5px;
+    padding: .5rem;
+  }
+
+  .button:hover{
+    background-color:purple;
+  }
+
+  .game{
+    display: flex;
+    flex-direction: column;
+  }
+  
