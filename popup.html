@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Cybercrime Category</title>
+</head>
+<body>
+    <div class="container">
+        <h1 id="categoryTitle"></h1>
+        <p>Details about the cybercrime category will go here.</p>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Extract category from the URL and set the title
+        var category = new URLSearchParams(window.location.search).get('category');
+        if (category) {
+            document.getElementById('categoryTitle').innerText = 'Category: ' + category;
+            redirectToCategory(category); // Add this line to handle redirection
+        } else {
+            alert('Category not found in the URL');
+        }
+    </script>
+</body>
+</html>

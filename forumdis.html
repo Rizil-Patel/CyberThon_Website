@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reddit-like App</title>
+  <style>
+
+    #postForm {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <style>
+    /* body {
+   font-family: Arial, sans-serif;
+   margin: 0;
+   padding: 0;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+   background-color: #f0f0f0; /* Set your desired background color */
+   /* padding: 20px 40px 20px 20px; Adjust the padding as needed (top right bottom left) */
+ /* }  */
+ 
+ h1 {
+   margin-bottom: 20px;
+ }
+ 
+ form {
+   max-width: 400px;
+   width: 100%;
+ }
+ 
+ label {
+   display: block;
+   margin-bottom: 8px;
+ }
+ 
+ input[type="text"],
+ textarea,
+ input[type="file"],
+ button {
+   width: 100%;
+   margin-bottom: 16px;
+   padding: 8px;
+ }
+ 
+ button {
+   background-color: #007bff; /* Set your desired button color */
+   color: #fff;
+   cursor: pointer;
+   width: 60px;
+   height: 60px;
+   border-radius: 50%;
+ }
+ 
+ button:hover {
+   background-color: #0056b3; /* Set your desired button hover color */
+ }
+ 
+ #leftContainer {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 600px; /* Adjust the max-width as needed */
+      padding-right: 500px;
+    }
+
+    /* Additional style for each post */
+    .post {
+      background-color: #ffffff;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .likeButton {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 5px 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 50%;
+      margin-top: 10px;
+    }
+
+    .likeCount {
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Create a New Post</h1>
+  
+  <!-- New Post button -->
+  <div class="post">
+  <button id="newPostButton" onclick="toggleForm()">New Post</button>
+
+  <!-- Post Form -->
+  <form id="postForm" action="/api/posts" method="POST" enctype="multipart/form-data" onsubmit="addPost(event)">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" required>
+    <br>
+    <label for="content">Content:</label>
+    <textarea id="content" name="content" required></textarea>
+    <br>
+    <label for="image">Image:</label>
+    <input type="file" id="image" name="image" accept="image/*" required>
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- Left side container for displaying posts -->
+  <div id="leftContainer"></div>
+</div>
+  <script>
+    // JavaScript function to toggle the visibility of the form
+    function toggleForm() {
+      var form = document.getElementById("postForm");
+      form.style.display = (form.style.display === "none") ? "block" : "none";
+    }
+
+    // JavaScript function to add a new post
+    function addPost(event) {
+      event.preventDefault(); // Prevents the form from submitting and reloading the page
+
+      // Get form values
+      var title = document.getElementById("title").value;
+      var content = document.getElementById("content").value;
+
+      // Create a new post element
+      var postElement = document.createElement("div");
+      postElement.className = "post";
+      postElement.innerHTML = "<h2>" + title + "</h2><p>" + content + "</p>";
+
+      // Create like button and count
+      var likeButton = document.createElement("button");
+      likeButton.className = "likeButton";
+      likeButton.innerHTML = "Like";
+      likeButton.onclick = function() {
+        increaseLikeCount(likeCountSpan);
+      };
+
+      var likeCountSpan = document.createElement("span");
+      likeCountSpan.className = "likeCount";
+      likeCountSpan.innerHTML = "0";
+
+      postElement.appendChild(likeButton);
+      postElement.appendChild(likeCountSpan);
+
+
+      // Append the new post to the left side container
+      var leftContainer = document.getElementById("leftContainer");
+      leftContainer.insertBefore(postElement, leftContainer.firstChild);
+
+      // Scroll to the new post
+      postElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // Hide the form after adding the post
+      toggleForm();
+
+      // Reset form values
+      document.getElementById("title").value = "";
+      document.getElementById("content").value = "";
+    }
+
+    // JavaScript function to increase the like count
+    function increaseLikeCount(likeCountSpan) {
+      var currentCount = parseInt(likeCountSpan.innerHTML, 10);
+      likeCountSpan.innerHTML = currentCount + 1;
+    }
+  </script>
+</body>
+</html>

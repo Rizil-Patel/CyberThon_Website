@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Newsfeed</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+      }
+
+      .newsfeed {
+        width: 400px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .input-section {
+        margin-bottom: 15px;
+      }
+
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      #newsList {
+        overflow-y: auto;
+        max-height: 300px;
+      }
+      .news-item img {
+        max-width: 100%;
+        height: auto;
+        display: block; /* This ensures that the image doesn't have extra space below it */
+        margin: 0 auto; /* Center the image horizontally */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="newsfeed">
+      <div class="input-section">
+        
+        <input type="file" id="imageInput" accept="image/*" />
+        <textarea
+          id="userInput"
+          placeholder="Type your news here..."
+        ></textarea>
+        <button onclick="addNews()">New Post</button>
+      </div>
+      <div id="newsList"></div>
+    </div>
+    <script>
+      function addNews() {
+        var userInput = document.getElementById("userInput").value;
+        var imageInput = document.getElementById("imageInput").files[0];
+
+        if (userInput.trim() === "" && !imageInput) {
+          alert("Please enter text or select an image.");
+          return;
+        }
+
+        var newsList = document.getElementById("newsList");
+
+        var newsItem = document.createElement("div");
+        newsItem.className = "news-item";
+
+        if (userInput.trim() !== "") {
+          var textNode = document.createTextNode(userInput);
+          newsItem.appendChild(textNode);
+        }
+
+        if (imageInput) {
+          var imageNode = document.createElement("img");
+          imageNode.src = URL.createObjectURL(imageInput);
+          imageNode.alt = "User Image";
+          newsItem.appendChild(imageNode);
+        }
+
+        // Add new news item to the top of the news list
+        newsList.insertBefore(newsItem, newsList.firstChild);
+
+        // Clear input fields
+        document.getElementById("userInput").value = "";
+        document.getElementById("imageInput").value = "";
+      }
+    </script>
+  </body>
+</html>

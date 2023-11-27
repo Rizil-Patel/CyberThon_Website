@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Safety Basics</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap");
+
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --color-primary: #6c63ff;
+        --color-success: #00bf8e;
+        --color-warning: #f7c94b;
+        --color-danger: #f75842;
+        --color-danger-variant: rgba(247, 88, 66, 0.4);
+        --color-white: #fff;
+        --color-light: rgba(255, 255, 255, 0.7);
+        --color-black: #000;
+        --color-bg: #1f2641;
+        --color-bg1: #2e3267;
+        --color-bg2: #424890;
+
+        --container-width-lg: 80%;
+        --container-width-md: 90%;
+        --container-width-sm: 94%;
+
+        --transition: all 400ms ease;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #1f2641;
+        margin: 0;
+        display: inline-block;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .loading {
+        align-items: center;
+        display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+      }
+
+      .loading span {
+        align-items: center;
+        display: inline-block;
+        font-size: 40px;
+        color: white;
+        text-transform: uppercase;
+        animation: flip 2s infinite;
+        animation-delay: calc(0.2s * var(--i));
+      }
+
+      @keyframes flip {
+        0%,
+        80% {
+          transform: rotateY(360deg);
+        }
+      }
+
+      .h1 {
+        position: relative;
+        -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0, 0, 0, 0.2));
+        font-size: 60px;
+        display: none; /* Initially hide the h1 content */
+        margin-bottom: 20vh;
+        margin-top: 5rem;
+        margin-left: 20rem;
+      }
+
+      .h1 span {
+        font-family: "Alfa Slab One", cursive;
+        position: relative;
+        display: inline-block;
+        color: white;
+        text-transform: uppercase;
+        animation: h1 1s infinite;
+        animation-delay: calc(0.1s * var(--i));
+      }
+
+      @keyframes h1 {
+        0%,
+        40%,
+        100% {
+          transform: translateY(0);
+        }
+        20% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .content-container {
+        margin-top: 80vh;
+        border: 10px;
+        color: #151719;
+        background-color: lightblue;
+        animation: fadeIn 1s forwards;
+        text-align: center; /* Center align the content */
+        padding: 20px; /* Add padding to the container */
+        border: 2px solid white; /* Add a border to create a box */
+        border-radius: 10px; /* Add border-radius for rounded corners */
+        max-width: 600px; /* Set a maximum width for the box */
+        margin: 0 auto; /* Center the box horizontally */
+        display: none;
+        margin-left: 27rem;
+      }
+
+      .content-text {
+        font-size: 20px;
+        line-height: 1.5;
+        display: inline-block; /* Center align inline-block elements */
+        text-align: left; /* Align text to the left within the container */
+        text-transform: uppercase;
+        background-image: linear-gradient(
+          -225deg,
+          #231557 0%,
+          #44107a 29%,
+          #ff1361 67%,
+          #fff800 100%
+        );
+        background-size: auto auto;
+        background-clip: border-box;
+        background-size: 20% auto;
+        color: #151719;
+        background-clip: text;
+        fill: transparent;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: textclip 2s linear infinite;
+        display: inline-block;
+        font-size: 22px;
+      }
+
+      @keyframes textclip {
+        to {
+          background-position: 20% center;
+        }
+      }
+
+      .navigation-arrows {
+        margin-top: 5rem;
+        display: none;
+        margin-bottom: 10vh;
+        margin-left: 18rem;
+      }
+
+      .navigation-arrows i {
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+        margin: 0 10px;
+    }
+
+      .navigation-arrows i:hover {
+        color: var(--color-success);
+        transition: background-color 0.2s, color 0.2s;
+      }
+
+      .quiz-button {
+        border-radius: 10px;
+        padding: 10px 20px;
+        margin: 10px;
+        text-decoration: none;
+        font-size: 18px;
+        color: #ffffff;
+        border: 2px solid #000000; /* Black border */
+        background-color: #2c3e50; /* Bluish background color for buttons */
+        cursor: pointer;
+        display: none;
+        overflow: hidden;
+        margin-left: 19rem;
+      }
+      .quiz-button:hover{
+        color: black;
+        background-color: var(--color-success);
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="container nav__container">
+        <a href="index.html"><h4>CyberSecurity Learning Portal</h4></a>
+        <ul class="nav__menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="allCategories.html">Categories</a></li>
+          <li><a href="courses1.html">Courses</a></li>
+          <li><a href="forum.html">Forum</a></li>
+          <li><a href="in.html">G_Learn</a></li>
+          <li>
+            <a href="contact.html"><i class="uil uil-user"></i></a>
+          </li>
+        </ul>
+
+        <button id="open-menu-btn"><i class="uil uil-bars"></i></button>
+        <button id="close-menu-btn"><i class="uil uil-multiply"></i></button>
+      </div>
+    </nav>
+    <div class="loading" id="loading">
+      <span style="--i: 1">L</span>
+      <span style="--i: 2">o</span>
+      <span style="--i: 3">a</span>
+      <span style="--i: 4">d</span>
+      <span style="--i: 5">i</span>
+      <span style="--i: 6">n</span>
+      <span style="--i: 7">g</span>
+      <span style="--i: 8">.</span>
+      <span style="--i: 9">.</span>
+      <span style="--i: 10">.</span>
+    </div>
+
+    <div class="h1">
+      <span style="--i: 1">C</span>
+      <span style="--i: 2">Y</span>
+      <span style="--i: 3">B</span>
+      <span style="--i: 4">E</span>
+      <span style="--i: 5">R</span>
+      <span style="--i: 6"></span>
+      <span style="--i: 7"></span>
+      <span style="--i: 8">B</span>
+      <span style="--i: 9">U</span>
+      <span style="--i: 10">L</span>
+      <span style="--i: 11">L</span>
+      <span style="--i: 12">Y</span>
+      <span style="--i: 13">I</span>
+      <span style="--i: 14">N</span>
+      <span style="--i: 15">G</span>
+      <span style="--i: 16"></span>
+      <span style="--i: 17"></span>
+
+    </div>
+
+    <div class="content-container">
+      <div class="content-text"></div>
+    </div>
+
+    <div class="navigation-arrows">
+      <i class="fa-solid fa-arrow-left"></i>
+      <i class="fa-solid fa-arrow-right"></i>
+    </div>
+
+    <a href="quiz2.html" class="quiz-button" onclick="takeQuiz()">Take a Quiz</a>
+
+    <script>
+      // Show loading screen when the page loads
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("loading").style.display = "flex";
+    
+        // Simulate loading by delaying the removal of the loading overlay
+        setTimeout(function () {
+          // Hide loading screen
+          document.getElementById("loading").style.display = "none";
+    
+          // Show content
+          document.querySelector(".h1").style.display = "block";
+    
+          // Show content container
+          document.querySelector(".content-container").style.display = "block";
+          document.querySelector(".navigation-arrows").style.display = "block";
+        }, 3000); // Adjust the time as needed
+    
+        currentSlide = 1;
+      });
+    
+      // Example navigation function
+      var currentSlide = 0;
+    
+      function navigate(n) {
+        var newSlide = currentSlide + n;
+    
+        // Check if the new slide is within the valid range (1 to 10)
+        if (newSlide >= 1 && newSlide <= 10) {
+          currentSlide = newSlide;
+    
+          document.querySelector(".content-text").innerHTML =
+            "Content for Slide " + currentSlide;
+    
+          // Check if it's the 10th slide to show the quiz button
+          if (currentSlide === 10) {
+            document.querySelector(".quiz-button").style.display = "inline-block";
+          } else {
+            document.querySelector(".quiz-button").style.display = "none";
+          }
+        }
+      }
+    
+      function takeQuiz() {
+        alert("Quiz button clicked! Implement your quiz logic here.");
+        // You can redirect to a quiz page or show a quiz modal, etc.
+      }
+    
+      // Event listeners for arrow buttons
+      document.querySelector(".fa-arrow-left").addEventListener("click", function () {
+        navigate(-1);
+      });
+    
+      document.querySelector(".fa-arrow-right").addEventListener("click", function () {
+        navigate(1);
+      });
+    </script>
+    
+    
+    
+  </body>
+</html>

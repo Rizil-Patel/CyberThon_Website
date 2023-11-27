@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      /* Your existing CSS styles */
+      .pop_box {
+        /* Your existing styles for the popup box */
+        height: 30vh;
+        width: 30vh;
+        background-color: #1f2641;
+        display: none; /* Initially hide the popup */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .popimg {
+        /* Your existing styles for the image container */
+        border-radius: 60px;
+        height: 15vh;
+        width: 15vh;
+        background-color: white;
+      }
+      .button {
+        /* Your existing styles for the button container */
+        display: flex;
+        flex-direction: row;
+        margin-top: 10px;
+        width: 100%;
+        justify-content: space-around;
+      }
+      .btn1,
+      .btn2 {
+        /* Your existing styles for the buttons */
+        background-color: orange;
+      }
+      .name {
+        color: white;
+      }
+      .visible {
+        display: flex;
+      }
+
+      .box {
+        height: 500px;
+        width: 500px;
+        background-color: aqua;
+        border-radius: 15px;
+        margin-left: 35%;
+      }
+      .box .image {
+        margin-left: 7rem;
+        margin-top: 2rem;
+        padding-top: 4rem;
+        height: 35rem;
+        width: 35rem;
+      }
+      .content p {
+        text-align: center;
+        margin-top: -12rem;
+      }
+      .image {
+        height: 100%;
+        width: 100%;
+        border-radius: 60px;
+      }
+
+      .sidenav {
+        height: 200px;
+        width: 160px;
+        position: fixed;
+        z-index:100;
+        top: 0;
+        right: 0;
+        background-color: rgb(107, 107, 205);
+        overflow-x: hidden;
+        padding-top: 20px;
+      }
+
+      .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 25px;
+        color: black;
+        display: block;
+      }
+
+      .sidenav a:hover {
+        color: #f1f1f1;
+      }
+
+      .main {
+        margin-left: 160px; /* Same as the width of the sidenav */
+        font-size: 28px; /* Increased text to enable scrolling */
+        padding: 0px 10px;
+      }
+
+      @media screen and (max-height: 450px) {
+        .sidenav {
+          padding-top: 15px;
+        }
+        .sidenav a {
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div style="z-index: 100;" class="sidenav">
+      <a href="#about">About</a>
+      <a href="contact.html"><i class="fa-regular fa-address-book"></i></a>
+      <div id="avatar" onclick="togglePopup()" style="cursor: pointer">
+        <i style="margin-left: 1.2rem; height: 1.5rem; width: 1.5rem;" class="fa-regular fa-user"></i>
+      </div>
+      <a href="#clients">Experts</a>
+    </div>
+
+
+
+    <div id="popup" class="wrapper pop_box">
+      <div class="popimg">
+        <img class="image" src="./images/fe2.png" />
+      </div>
+      <br />
+      <div class="name">nidhi</div>
+      <div class="button">
+        <button class="btn1" style="width: 45%">login</button>
+        <button class="btn2" style="width: 45%; height: 27px">signin</button>
+      </div>
+    </div>
+
+    <script>
+      function togglePopup() {
+        var popup = document.getElementById("popup");
+        popup.classList.toggle("visible");
+      }
+    </script>
+  </body>
+</html>

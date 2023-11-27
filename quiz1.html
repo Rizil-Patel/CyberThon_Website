@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Page</title>
+    <link rel="stylesheet" href="./css/game.css" />
+  </head>
+  <body>
+
+    <h2>Lets Play Cyber Eduaction Game</h2>
+    <div class="container">
+      <div class="quiz-container">
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <button class="submit-button" onclick="checkAnswer()">
+          Submit Answer
+        </button>
+        <div class="result-message" id="result-message"></div>
+        <a href="badge.html" class="badge-link" id="badge-link">Go to Badge</a>
+      </div>
+    </div>
+
+    <script>
+      var currentQuestion = 0; // Index of the current question
+
+       var questions = [
+  {
+    question: "What is phishing?",
+    options: [
+      "A way to catch fish",
+      "A method to secure emails",
+      "An attempt to trick individuals into revealing sensitive information",
+      "A type of computer virus"
+    ],
+    answer: "An attempt to trick individuals into revealing sensitive information",
+  },
+  {
+    question: "Which of the following is a common phishing method?",
+    options: [
+      "Brute force attack",
+      "Denial of Service (DoS) attack",
+      "Social engineering",
+      "Firewall intrusion"
+    ],
+    answer: "Social engineering",
+  },
+  {
+    question: "How can you recognize a phishing email?",
+    options: [
+      "It has a friendly greeting",
+      "It includes urgent requests for personal information",
+      "It has a clear and professional language",
+      "It contains the official company logo"
+    ],
+    answer: "It includes urgent requests for personal information",
+  },
+  {
+    question: "What is a phishing website?",
+    options: [
+      "A website with a lot of fishing-related content",
+      "A website designed to trick visitors into providing sensitive information",
+      "A website for online shopping",
+      "A website for online gaming"
+    ],
+    answer: "A website designed to trick visitors into providing sensitive information",
+  },
+  {
+    question: "Why is it important to verify the sender's email address in potential phishing emails?",
+    options: [
+      "To make sure the sender is using a professional email signature",
+      "To ensure the email is not marked as spam",
+      "To identify if the email is from a legitimate source",
+      "To increase the email deliverability"
+    ],
+    answer: "To identify if the email is from a legitimate source",
+  },
+];
+
+
+
+      function showQuestion() {
+        var questionElement = document.getElementById("question");
+        var optionsElement = document.getElementById("options");
+
+        // Display the current question
+        questionElement.textContent =
+          "Question " +
+          (currentQuestion + 1) +
+          ": " +
+          questions[currentQuestion].question;
+
+        // Display options
+        optionsElement.innerHTML = "";
+        questions[currentQuestion].options.forEach(function (option, index) {
+          var optionElement = document.createElement("div");
+          optionElement.className = "option";
+          optionElement.innerHTML = `
+              <input type="radio" name="answer" id="option${index}" value="${option}">
+              <label for="option${index}">${option}</label>
+            `;
+          optionsElement.appendChild(optionElement);
+        });
+
+        // Add event listener after options are rendered
+        addOptionEventListeners();
+      }
+
+      function addOptionEventListeners() {
+        var radioButtons = document.querySelectorAll('input[name="answer"]');
+        radioButtons.forEach(function (radioButton) {
+          radioButton.addEventListener("change", function () {
+            resetOptionStyles();
+            var selectedOption = document.querySelector(
+              `label[for=${radioButton.id}]`
+            );
+            selectedOption.style.borderColor = "#3498db";
+          });
+        });
+      }
+
+      function resetOptionStyles() {
+        var options = document.querySelectorAll('input[name="answer"]');
+        options.forEach(function (option) {
+          var label = document.querySelector(`label[for=${option.id}]`);
+          label.style.borderColor = "";
+        });
+      }
+
+      function checkAnswer() {
+        var selectedAnswer = document.querySelector(
+          'input[name="answer"]:checked'
+        );
+        var resultMessageElement = document.getElementById("result-message");
+        var badgeLink = document.getElementById("badge-link");
+
+        if (selectedAnswer) {
+          // Highlight the selected answer in red or green
+          var selectedOption = document.querySelector(
+            `label[for=${selectedAnswer.id}]`
+          );
+          var isCorrect =
+            selectedAnswer.value === questions[currentQuestion].answer;
+
+          selectedOption.style.borderColor = isCorrect ? "#2ecc71" : "#e74c3c";
+          selectedOption.style.backgroundColor = isCorrect
+            ? "#2ecc711a"
+            : "#e74c3c1a";
+
+          // Display a message based on the selected answer
+          resultMessageElement.textContent = isCorrect
+            ? "Correct!"
+            : "Incorrect!";
+
+          // Disable the radio buttons after selection
+          var radioButtons = document.querySelectorAll('input[name="answer"]');
+          radioButtons.forEach(function (radioButton) {
+            radioButton.disabled = true;
+          });
+
+          // Move to the next question after a delay
+          setTimeout(function () {
+            // Reset styling and enable radio buttons for the next question
+            resetOptionStyles();
+            radioButtons.forEach(function (radioButton) {
+              radioButton.disabled = false;
+            });
+            currentQuestion++;
+
+            if (currentQuestion < questions.length) {
+              showQuestion();
+              resultMessageElement.textContent = ""; // Clear the result message
+            } else {
+              resultMessageElement.textContent = "Quiz completed!";
+              badgeLink.style.display = "inline-block"; // Show the badge link
+            }
+          }, 1000);
+        } else {
+          alert("Please select an answer before submitting.");
+        }
+      }
+
+      // Show the quiz container after a delay (simulate loading)
+      setTimeout(function () {
+        document.querySelector(".quiz-container").style.display = "block";
+        showQuestion(); // Show the first question
+      }, 2000);
+    </script>
+  </body>
+</html>

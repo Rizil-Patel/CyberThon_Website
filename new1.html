@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Your existing CSS styles */
+        * {
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        .pop_box {
+            /* Your existing styles for the popup box */
+            height: 30vh;
+            width: 30vh;
+            background-color: #1f2641;
+            display: none; /* Initially hide the popup */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .popimg {
+            /* Your existing styles for the image container */
+            border-radius: 60px;
+            height: 15vh;
+            width: 15vh;
+            background-color: white;
+        }
+        .button {
+            /* Your existing styles for the button container */
+            display: flex;
+            flex-direction: row;
+            margin-top: 10px;
+            width: 100%;
+            justify-content: space-around;
+        }
+        .btn1, .btn2 {
+            /* Your existing styles for the buttons */
+            background-color: orange;
+        }
+        .name {
+            color: white;
+        }
+        .visible {
+            display: flex;
+        }
+
+        .box123{
+            height: 500px;
+            width: 500px;
+            background-color:aqua ;
+            border-radius: 15px;
+            margin-left: 35%;
+        }
+        .box123 .image123{
+            margin-left: 7rem;
+            margin-top: 2rem;
+            padding-top: 4rem;
+            height: 35rem;
+            width: 35rem;
+        }
+        .content123 p{
+            text-align: center;
+            margin-top: -12rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="avatar" onclick="togglePopup()" style="cursor: pointer;">
+        <!-- Your avatar logo goes here -->
+        <img src="login icon.jpeg" alt="Avatar Logo" width="30px" height="30px">
+    </div>
+
+    <div id="popup" class="wrapper pop_box">
+        <div class="popimg">
+            <img class="image"/>
+        </div>
+        <br>
+        <div class="name">
+            nidhi
+        </div>
+        <div class="button">
+            <button class="btn1" style="width: 45%;">
+                login
+            </button>
+            <button class="btn2" style="width: 45%; height: 27px;">
+                signin
+            </button>
+        </div>
+    </div>
+
+    <div class="box123">
+        <div class="image123">
+        <img src="login icon.jpeg" alt="Avatar Logo" width="50%" height="50%">
+        </div>
+        <div class="content123">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur libero officiis delectus ad provident rem voluptatem aut qui reprehenderit, voluptas quibusdam eos neque voluptate tempora! Praesentium odio neque quas obcaecati.</p>
+        </div>
+    </div>
+
+    <script>
+        function togglePopup() {
+            var popup = document.getElementById("popup");
+            popup.classList.toggle("visible");
+        }
+    </script>
+
+</body>
+</html>

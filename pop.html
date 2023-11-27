@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Crime Categories</title>
+    <style>
+      :root {
+        --color-primary: #6c63ff;
+        --color-success: #00bf8e;
+        --color-warning: #f7c94b;
+        --color-danger: #f75842;
+        --color-danger-variant: rgba(247, 88, 66, 0.4);
+        --color-white: #fff;
+        --color-light: rgba(255, 255, 255, 0.7);
+        --color-black: #000;
+        --color-bg: #1f2641;
+        --color-bg1: #2e3267;
+        --color-bg2: #424890;
+
+        --containerpop-width-lg: 80%;
+        --containerpop-width-md: 90%;
+        --containerpop-width-sm: 94%;
+
+        --transition: all 400ms ease;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--color-bg);
+      }
+
+      .containerpop {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: aqua;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      form {
+        display: flex;
+      }
+
+      #searchformpop {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 40%;
+        width: 5rem;
+      }
+
+      button:hover {
+        background-color: #2a7a2d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="containerpop">
+      <h1>Crime Categories</h1>
+      <form id="searchformpop">
+        <input type="text" id="query" placeholder="Enter your query" />
+        <button type="button" onclick="search()">Search</button>
+      </form>
+    </div>
+
+    <script>
+      function search() {
+        var query = document.getElementById("query").value.toLowerCase();
+        var category = identifyCategory(query);
+
+        if (category) {
+          window.location.href = "crime_category.html?category=" + category;
+        } else {
+          alert("Category not found");
+        }
+      }
+
+      function identifyCategory(query) {
+        // Implement your logic to identify the category based on the user's query
+        // This is a placeholder; replace it with your actual logic
+        var crimeCategories = {
+          robbery: ["theft", "burglary", "mugging"],
+          assault: ["physical assault", "verbal assault"],
+          fraud: ["identity theft", "credit card fraud"],
+          phishing: ["phishing", "otp", "email scam", "fraudulent emails"],
+          malware: ["malware", "ransomware", "trojan"],
+          hacking: ["hacking", "unauthorized access", "cyber intrusion"],
+          identity_theft: ["identity theft", "personal information theft"],
+          credit_card_fraud: ["credit card fraud", "payment card fraud"],
+          online_scam: ["online scam", "internet scam"],
+          cyber_extortion: ["cyber extortion", "online blackmail"],
+          cyberbullying: ["cyberbullying", "whatsapp", "online harassment"],
+          data_breach: ["data breach", "information leak"],
+          pharming: ["pharming", "DNS spoofing"],
+          "drive-by_download": ["drive-by download", "malicious download"],
+          social_engineering: ["social engineering", "manipulative tactics"],
+          cryptojacking: [
+            "cryptojacking",
+            "unauthorized cryptocurrency mining",
+          ],
+          denial_of_service: ["denial of service", "DDoS attack"],
+          child_exploitation: ["child exploitation", "online child abuse"],
+          dark_web_crimes: [
+            "dark web crimes",
+            "illegal activities on the dark web",
+          ],
+          // Add more categories as needed
+        };
+
+        for (var category in crimeCategories) {
+          for (var keyword of crimeCategories[category]) {
+            if (query.includes(keyword)) {
+              return category;
+            }
+          }
+        }
+        return null;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Allerta Stencil', sans-serif;
+            padding: 0;
+            margin: 70px 10px;
+            background: #34495e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(99vh - 140px);
+        }
+
+        .badge {
+            position: relative;
+            letter-spacing: 0.08em;
+            color: orange;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            transform: rotate(-14deg);
+            text-align: center;
+            filter: drop-shadow(0.25em 0.7em 0.95em rgba(0,0,0, 0.8));
+            font-size: calc(10px + (20 - 10) * ( (100vw - 420px) / ( 860) ));
+           
+            @media screen and (max-width: 420px) {
+                font-size: 10px;
+            }
+           
+            @media screen and (min-width: 1280px) {
+                font-size: 20px;
+            }
+           
+            &::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: block;
+                width: 15em;
+                height: 15em;
+                border-radius: 100%;
+                background:rgb(167, 167, 78);
+                opacity: 0.8;
+                transition: opacity 0.3s linear;
+            }
+
+            &:hover {
+                text-decoration: none;
+                transform: rotate(-10deg) scale(1.05);
+
+                &::before {
+                    opacity: 0.2;
+                }
+            }
+
+            svg {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: block;
+                z-index: 0;
+                width: 10em;
+                height: 10em;
+            }
+
+            span {
+                display: block;
+                background: black;
+                border-radius: 0.4em;
+                padding: 0.4em 1em;
+                z-index: 1;
+                min-width: 11em;
+                border: 1px solid;
+                text-transform: uppercase;
+            }
+
+            text {
+                font-size: 0.9em; /* Adjusted font size for text */
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#" class="badge">
+        <svg viewBox="0 0 210 210">
+            <g stroke="none" fill="none">
+                <path d="M22,104.5 C22,58.9365081 58.9365081,22 104.5,22 C150.063492,22 187,58.9365081 187,104.5" id="top"></path>
+                <path d="M22,104.5 C22,150.063492 58.9365081,187 104.5,187 C150.063492,187 187,150.063492 187,104.5" id="bottom"></path>
+            </g>
+            <circle cx="105" cy="105" r="62" stroke="currentColor" stroke-width="1" fill="none" />
+            <text font-size="1.5em" fill="orange">
+                <textPath startOffset="50%" text-anchor="middle" alignment-baseline="middle" xlink:href="#top">
+                    Congratulations!
+                </textPath>
+            </text>
+            <text font-size="1.5em" fill="orange">
+                <textPath startOffset="50%" text-anchor="middle" alignment-baseline="middle" xlink:href="#bottom">
+                    Congratulations!
+                </textPath>
+            </text>
+        </svg>
+        <span>Beginner Level Completed</span>
+    </a>
+</body>
+</html>

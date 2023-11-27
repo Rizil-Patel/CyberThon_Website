@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Newsfeed</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+body{
+    background-color: #1f2641;
+}
+.newsfeed {
+    width: 50%;
+    margin-left: -35rem;
+    background-color:#00bf8e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: black;
+}
+
+.input-section {
+    margin-bottom: 15px;
+}
+
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: purple;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: blue;
+}
+
+#newsList {
+    overflow-y: auto;
+    max-height: 300px;
+    box-shadow: lightslategray;
+    border-radius: 20px;
+    padding: 5px;
+}
+.news-item img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* This ensures that the image doesn't have extra space below it */
+    margin: 0 auto; /* Center the image horizontally */
+    
+}
+.news-item{
+    margin-top: 30px;
+   box-shadow: 0 2px 4px rgba(71, 70, 70, 0.1);
+    background-color: #1f2641;
+    height: auto;
+    width: 30rem;
+    display: block;
+}
+/* (Your existing styles remain unchanged) */
+
+.news-item img {
+    width: 80%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    background-size: cover;
+    overflow: hidden;
+     
+}
+.news-item div{
+    color: white;
+
+} 
+
+.comment-section {
+    margin-top: 10px;
+    background-color: ##1f2641;
+    color: white;
+}
+
+.comment-input {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}
+
+.comment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comment-item {
+    margin-bottom: 5px;
+}
+
+h2{
+    color: white;
+    margin-top:-25rem;
+    margin-left: 25rem;
+}
+
+
+    </style>
+</head>
+
+<body>
+    <h2>Share Your Experience here</h2>
+
+    <div class="newsfeed">
+        <div class="input-section">
+            <textarea id="userInput" placeholder="Type your news here..."></textarea>
+            <input style="color: white;"   type="file" id="imageInput" accept="image/*">
+            <button onclick="addNews()">Add News</button>
+        </div>
+        <div id="newsList"></div>
+    </div>
+    <script >
+       var newsArray = [];
+
+function addNews() {
+    var userInput = document.getElementById('userInput').value;
+    var imageInput = document.getElementById('imageInput').files[0];
+
+    if (userInput.trim() === '' && !imageInput) {
+        alert('Please enter text or select an image.');
+        return;
+    }
+
+    var newsList = document.getElementById('newsList');
+
+    var newsItem = document.createElement('div');
+    newsItem.className = 'news-item';
+
+    if (userInput.trim() !== '') {
+        // Create a div for text content
+        var textContentDiv = document.createElement('div');
+        textContentDiv.textContent = userInput;
+        textContentDiv.style.color = 'white'; // Set text color to white
+        newsItem.appendChild(textContentDiv);
+    }
+
+    if (imageInput) {
+        var imageNode = document.createElement('img');
+        imageNode.src = URL.createObjectURL(imageInput);
+        imageNode.alt = 'User Image';
+        newsItem.appendChild(imageNode);
+    }
+
+    // Add new news item to the top of the news list
+    newsList.insertBefore(newsItem, newsList.firstChild);
+
+    // Clear input fields
+    document.getElementById('userInput').value = '';
+    document.getElementById('imageInput').value = '';
+
+    // Add comment section
+    var commentSection = document.createElement('div');
+    commentSection.className = 'comment-section';
+
+    var commentInput = document.createElement('input');
+    commentInput.type = 'text';
+    commentInput.className = 'comment-input';
+    commentInput.placeholder = 'Add a comment...';
+
+    var postButton = document.createElement('button');
+    postButton.textContent = 'Post';
+    postButton.onclick = function () {
+        addComment(newsArray.length - 1); // Pass the index of the last added news item
+    };
+
+    var commentList = document.createElement('ul');
+    commentList.className = 'comment-list';
+
+    commentSection.appendChild(commentInput);
+    commentSection.appendChild(postButton);
+    commentSection.appendChild(commentList);
+
+    newsItem.appendChild(commentSection);
+
+    // Add news item and its comment section to the array
+    newsArray.unshift({
+        newsItem: newsItem,
+        comments: []
+    });
+}
+
+function addComment(newsIndex) {
+    var commentInput = newsArray[newsIndex].newsItem.querySelector('.comment-input');
+    var commentText = commentInput.value.trim();
+
+    if (commentText !== '') {
+        var commentList = newsArray[newsIndex].newsItem.querySelector('.comment-list');
+
+        // Create a list item for each comment
+        var commentItem = document.createElement('li');
+        commentItem.className = 'comment-item';
+        commentItem.textContent = commentText;
+        commentItem.style.color = 'white'; // Set text color to white
+        newsArray[newsIndex].comments.push(commentItem);
+
+        // Append the comment list item to the comment list
+        commentList.appendChild(commentItem);
+
+        // Clear the comment input field
+        commentInput.value = '';
+    }
+}
+    </script>
+</body>
+</html>
